@@ -70,6 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)showToast:(NSString *)text;
 
++ (void)showToast:(NSString *)text delaySeconeds:(NSInteger)seconds;
 /**
  * 隐藏菊花
  *

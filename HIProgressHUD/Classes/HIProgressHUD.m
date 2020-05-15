@@ -49,12 +49,15 @@
     [pv setAnimationType:HIProgressViewAnimationZoom];
 }
 
-
 + (void)showToast:(NSString *)text{
+    [self showToast:text delaySeconeds:3];
+}
+
++ (void)showToast:(NSString *)text delaySeconeds:(NSInteger)seconds{
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
     if (window) {
         HIProgressView *progressView = [self showOn:window mode:HIProgressViewModeText detailText:text animated:YES];
-        [progressView hideAnimated:YES afterDelay:3];
+        [progressView hideAnimated:YES afterDelay:seconds];
     }
 }
 
