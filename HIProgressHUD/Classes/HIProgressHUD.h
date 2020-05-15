@@ -61,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param text 状态文字，如“请求中...”
  * @param animated 如果设置成YES，将会显示默认animationType的动画；如果设置成NO，不会显示动画。
+ *
  * @note 加载到AppDelegate的window上
  * @note 调用该方法前提keyWindow不能为nil。
  *
@@ -68,9 +69,29 @@ NS_ASSUME_NONNULL_BEGIN
 */
 + (void)showWithText:(nullable NSString *)text on:(UIView *)view animate:(BOOL)animated;
 
+/**
+ * 显示吐司
+ *
+ * 基于keyWindow，调用请确保window有值
+ *
+ * @param text 吐司显示的内容
+ *
+ * @note 默认显示时间3秒
+ *
+ * @see showToast:delaySeconeds:
+ */
 + (void)showToast:(NSString *)text;
 
+/**
+ * 显示吐司
+ *
+ * 基于keyWindow，调用请确保window有值
+ *
+ * @param text 吐司显示的内容
+ * @param seconds 显示时间
+*/
 + (void)showToast:(NSString *)text delaySeconeds:(NSInteger)seconds;
+
 /**
  * 隐藏菊花
  *
