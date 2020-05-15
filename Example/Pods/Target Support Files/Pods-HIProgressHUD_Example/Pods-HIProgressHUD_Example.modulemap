@@ -1,0 +1,6 @@
+framework module Pods_HIProgressHUD_Example {
+  umbrella header "Pods-HIProgressHUD_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
