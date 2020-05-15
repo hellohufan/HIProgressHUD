@@ -53,15 +53,7 @@
 }
 
 - (void)showToast {
-    [HIProgressHUD showOn:self.navigationController.view mode:HIProgressViewModeText detailText:@"helloworld" animated:YES];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Do something useful in the background
-        [self doSomeWork];
-        //显示和隐藏必须在主线程调用
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [HIProgressHUD hide];
-        });
-    });
+    [HIProgressHUD showToast:@"helloworldhelloworldhelloworldhelloworld"];
 }
 
 #pragma mark - Tasks

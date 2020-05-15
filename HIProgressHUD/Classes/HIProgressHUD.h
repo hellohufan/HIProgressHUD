@@ -68,7 +68,8 @@ NS_ASSUME_NONNULL_BEGIN
 */
 + (void)showWithText:(nullable NSString *)text on:(UIView *)view animate:(BOOL)animated;
 
-+ (HIProgressView *)showOn:(UIView *)view mode:(HIProgressViewMode)mode detailText:(NSString *)text animated:(BOOL)animated;
++ (void)showToast:(NSString *)text;
+
 /**
  * 隐藏菊花
  *

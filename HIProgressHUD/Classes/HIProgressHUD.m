@@ -50,10 +50,12 @@
 }
 
 
-+ (void)showToast:(NSString *)text on:(UIView *)view{
-    HIProgressView *progressView = [self showOn:view mode:HIProgressViewModeText detailText:text animated:YES];
-    
-    [progressView hideAnimated:YES afterDelay:3];
++ (void)showToast:(NSString *)text{
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    if (window) {
+        HIProgressView *progressView = [self showOn:window mode:HIProgressViewModeText detailText:text animated:YES];
+        [progressView hideAnimated:YES afterDelay:3];
+    }
 }
 
 + (HIProgressView *)showOn:(UIView *)view mode:(HIProgressViewMode)mode detailText:(NSString *)text animated:(BOOL)animated{
