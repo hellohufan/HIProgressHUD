@@ -54,11 +54,32 @@
 }
 
 + (void)showToast:(NSString *)text delaySeconeds:(NSInteger)seconds{
+    [self showToast:text position:HIProgressViewToastPositionCenter delaySeconeds:seconds];
+}
+
++ (void)showToast:(NSString *)text position:(HIProgressViewToastPosition)position delaySeconeds:(NSInteger)seconds{
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
     if (window) {
-        HIProgressView *progressView = [self showOn:window mode:HIProgressViewModeText detailText:text animated:YES];
-        [progressView hideAnimated:YES afterDelay:seconds];
+        [self showToast:text on:window position:position delaySeconeds:seconds];
     }
+}
+
++ (void)showToast:(NSString *)text on:(UIView *)view position:(HIProgressViewToastPosition)position delaySeconeds:(NSInteger)seconds{
+    HIProgressView *progressView = [self showOn:view mode:HIProgressViewModeText detailText:text animated:YES];
+    NSArray *offsetY = @[@(-800), @(0), @(800)];
+    CGFloat y = ((NSNumber *)offsetY[position]).floatValue;
+    progressView.offset = CGPointMake(0, y);
+    [progressView hideAnimated:YES afterDelay:seconds];
+}
+
++ (void)showProgressView:(UIView *)view style:(HIProgressBarStyle)style text:(NSString *)text{
+    HIProgressView *hud = [HIProgressHUD showOn:view animated:YES];
+    hud.mode = (HIProgressViewMode)style;
+    hud.label.text = @"加载中...";
+}
+
++ (void)showProgress:(CGFloat)progress view:(UIView *)view{
+    [self progressViewFromMotherView:view].progress = progress;
 }
 
 + (HIProgressView *)showOn:(UIView *)view mode:(HIProgressViewMode)mode detailText:(NSString *)text animated:(BOOL)animated{

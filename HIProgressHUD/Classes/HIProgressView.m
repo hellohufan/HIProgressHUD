@@ -187,10 +187,6 @@ CGFloat const HIProgressMaxOffset = 1000000.f;
 }
 
 - (void)hideUsingAnimation:(BOOL)animated {
-    // Cancel any scheduled hideAnimated:afterDelay: calls.
-    // This needs to happen here instead of in done,
-    // to avoid races if another hideAnimated:afterDelay:
-    // call comes in while the HUD is animating out.
     [self.hideDelayTimer invalidate];
 
     if (animated && self.showStarted) {
@@ -561,10 +557,6 @@ CGFloat const HIProgressMaxOffset = 1000000.f;
 }
 
 - (void)layoutSubviews {
-    // There is no need to update constraints if they are going to
-    // be recreated in [super layoutSubviews] due to needsUpdateConstraints being set.
-    // This also avoids an issue on iOS 8, where updatePaddingConstraints
-    // would trigger a zombie object access.
     if (!self.needsUpdateConstraints) {
         [self updatePaddingConstraints];
     }

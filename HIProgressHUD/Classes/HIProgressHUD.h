@@ -15,6 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HIProgressHUD : NSObject
+
 /**
  * 显示菊花
  *
@@ -91,6 +92,56 @@ NS_ASSUME_NONNULL_BEGIN
  * @param seconds 显示时间
 */
 + (void)showToast:(NSString *)text delaySeconeds:(NSInteger)seconds;
+
+/**
+ * 显示吐司
+ *
+ * 基于keyWindow，调用请确保window有值
+ *
+ * @param text 吐司显示的内容
+ * @param position 显示位置，上中下，参见HIProgressViewToastPosition
+ * @param seconds 显示时间
+ *
+ * @see HIProgressViewToastPosition
+*/
++ (void)showToast:(NSString *)text position:(HIProgressViewToastPosition)position delaySeconeds:(NSInteger)seconds;
+
+/**
+ * 显示吐司
+ *
+ *
+ * @param text 吐司显示的内容
+ * @param position 显示位置，上中下，参见HIProgressViewToastPosition
+ * @param seconds 显示时间
+ *
+ * @see HIProgressViewToastPosition
+*/
++ (void)showToast:(NSString *)text on:(UIView *)view position:(HIProgressViewToastPosition)position delaySeconeds:(NSInteger)seconds;
+
+/**
+ * 显示百分比进度条
+ * 需要配合方法showProgress:view:使用
+ *
+ * @param view 状态条的super view
+ * @param style 三种style，参看HIProgressBarStyle
+ * @param text 显示文本
+ *
+ * @see HIProgressBarStyle
+ * @see showProgress:view:
+*/
++ (void)showProgressView:(UIView *)view style:(HIProgressBarStyle)style text:(NSString *)text;
+
+/**
+ * 状态传入当前进度百分比
+ * 需要配合方法showProgressView:style:text:使用
+ *
+ * @param progress 传入当前进度，数值0-1
+ * @param view 状态条的super view
+ *
+ * @see HIProgressBarStyle
+ * @see showProgressView:style:text:
+*/
++ (void)showProgress:(CGFloat)progress view:(UIView *)view;
 
 /**
  * 隐藏菊花

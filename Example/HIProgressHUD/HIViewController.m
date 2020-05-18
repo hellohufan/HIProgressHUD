@@ -27,8 +27,11 @@
     [super awakeFromNib];
     self.examples =
     @[[HIExample exampleWithTitle:@"简洁菊花" selector:@selector(easyShow)],
-      [HIExample exampleWithTitle:@"Tost" selector:@selector(showToast)],
-//      [HIExample exampleWithTitle:@"带文字详情的菊花模式" selector:@selector(detailsLabelExample)]
+      [HIExample exampleWithTitle:@"showToast" selector:@selector(showToast)],
+      [HIExample exampleWithTitle:@"showToastOnBottom" selector:@selector(showToastOnBottom)],
+      [HIExample exampleWithTitle:@"showHorizantalBar" selector:@selector(showHorizantalBar)],
+      [HIExample exampleWithTitle:@"showAnnulorBar" selector:@selector(showAnnulorBar)],
+      [HIExample exampleWithTitle:@"showInnerAnnulorBar" selector:@selector(showInnerAnnulorBar)]
     ];
 }
 
@@ -53,9 +56,42 @@
 }
 
 - (void)showToast {
-    [HIProgressHUD showToast:@"helloworldhelloworldhelloworldhelloworld"];
+    [HIProgressHUD showToast:@"helloworld"];
 }
 
+- (void)showToastOnBottom{
+    [HIProgressHUD showToast:@"helloworld" position:HIProgressViewToastPositionBottom delaySeconeds:3];
+}
+
+- (void)showHorizantalBar{
+    [HIProgressHUD showProgressView:self.navigationController.view style:HIProgressBarStyleHorizontal text:@"加载中..."];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self doSomeWorkWithProgress];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [HIProgressHUD hide:self.navigationController.view];
+        });
+    });
+}
+
+- (void)showAnnulorBar{
+    [HIProgressHUD showProgressView:self.navigationController.view style:HIProgressBarStyleAnnulor text:@"加载中..."];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self doSomeWorkWithProgress];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [HIProgressHUD hide:self.navigationController.view];
+        });
+    });
+}
+
+- (void)showInnerAnnulorBar{
+    [HIProgressHUD showProgressView:self.navigationController.view style:HIProgressBarStyleInnerAnnulor text:@"加载中..."];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self doSomeWorkWithProgress];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [HIProgressHUD hide:self.navigationController.view];
+        });
+    });
+}
 #pragma mark - Tasks
 
 - (void)doSomeWork {
@@ -83,7 +119,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             // Instead we could have also passed a reference to the HUD
             // to the HUD to myProgressTask as a method parameter.
-            [HIProgressHUD progressViewFromMotherView:self.navigationController.view].progress = progress;
+//            [HIProgressHUD progressViewFromMotherView:self.navigationController.view].progress = progress;
+            [HIProgressHUD showProgress:progress view:self.navigationController.view];
         });
         usleep(20000);
     }

@@ -11,17 +11,23 @@
 
 extern CGFloat const HIProgressMaxOffset;
 
+typedef NS_ENUM(NSInteger, HIProgressBarStyle) {
+    HIProgressBarStyleAnnulor = 1,  //环型进度条
+    HIProgressBarStyleInnerAnnulor, //内环型进度条
+    HIProgressBarStyleHorizontal    //横条型进度条
+};
+
 typedef NS_ENUM(NSInteger, HIProgressViewMode) {
     HIProgressViewModeThrobber = 0,     //菊花
+    HIProgressViewModeAnnularBar,       //环形进度条
     HIProgressViewModeInnerAnnularBar,  //内环形进度条
     HIProgressViewModeHorizontalBar,    //横条型进度条
-    HIProgressViewModeAnnularBar,       //环形进度条
     HIProgressViewModeCustomView,       //定制化图片
     HIProgressViewModeText              //类似Toast，offset可控制位置，默认（0，0）居中。
 };
 
 typedef NS_ENUM(NSInteger, HIProgressViewToastPosition) {
-    HIProgressViewToastPositionTop,
+    HIProgressViewToastPositionTop = 0,
     HIProgressViewToastPositionCenter,
     HIProgressViewToastPositionBottom
 };
